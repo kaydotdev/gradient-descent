@@ -8,10 +8,10 @@ Overview is based on research paper "An overview of gradient descent optimizatio
 
 ### Overviewed gradient algorithms
 
-- SGD
+- Batch gradient descent
+- Stochastic gradient descent
+- Mini-batch gradient descent
 - Nesterov AG
 - ADAGRAD
 - RMSPROP
 - ADAM
-- Dynamic Sampling SGD
-- Mini-batch SGD
