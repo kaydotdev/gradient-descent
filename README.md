@@ -11,6 +11,7 @@ Overview is based on research paper "An overview of gradient descent optimizatio
 - Batch gradient descent
 - Stochastic gradient descent
 - Mini-batch gradient descent
+- Momentum
 - Nesterov AG
 - ADAGRAD
 - RMSPROP
