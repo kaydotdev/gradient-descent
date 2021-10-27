@@ -1,5 +1,7 @@
 # Adaptive Stochastic Gradient Descent
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/antonAce/adaptive-gradient-descent/blob/master/gradient_descent.ipynb)
+
 **The goal of the research:** Implementation and comparison of adaptive stochastic gradient descent methods using Python programming language. The efficiency comparison is demonstrated in the logistic regression optimization problem.
 
 ### Attribution
