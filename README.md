@@ -1,6 +1,6 @@
 # Investigation of convergence of stochastic gradient and finite-difference optimization methods
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/antonAce/adaptive-gradient-descent/blob/master/gradient_descent.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/antonAce/adaptive-gradient-descent/blob/master/notebook/algorithms_overview.ipynb)
 
 ## Abstract
 
