@@ -1,19 +1,31 @@
-# Investigation of convergence of stochastic gradient and finite-difference optimization methods
+UDC 519.688
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/antonAce/adaptive-gradient-descent/blob/master/notebook/algorithms_overview.ipynb)
+# Investigating convergence rate of stochastic finite-difference optimization methods
+
+V. I. Norkin (1), A. Y. Kozyriev (1)
+
+[1 - Igor Sikorsky Kyiv Polytechnic Institute, Kyiv, Ukraine](https://kpi.ua/en)
+
 
 ## Abstract
 
-Stochastic gradient algorithms have become one of the most popular numerical optimization methods due to their efficiency and formulation simplicity. In general, the convergence rate indicates the performance of the particular stochastic optimization method. The article investigates the inquired metric of stochastic finite-difference optimization methods on convex functions and highlights that it is not an entirely adequate measure of the optimization algorithm's quality in general.
+Nowadays, stochastic gradient algorithms have become one of the most popular numerical optimization methods due to their efficiency and formulation simplicity. They are used in a variety of areas: from cost reduction problems to deep learning. The common feature of all these problems is to find the optimal values for a set of independent parameters in a mathematical model that can be described by a set of equalities and inequalities. The number of computing resources and time spent to solve the problem, the accuracy of the mathematical model, etc. depends on how effective the chosen gradient descent algorithm is. In practice, stochastic gradient algorithms only show fair results for convex and smooth functions. However, most modern optimization problems do not belong to these classes (for instance, a deep neural network with a ReLU activation function is a non-smooth optimization problem). The article proposes a new modification to the existing stochastic gradient algorithms based on an averaged functions smoothing technique and finite-difference approximations with more robustness to the non-smooth target functions.
+
+## Keywords
+
+Gradient descent methods, optimization theory, unconstrained optimization, nonsmooth problems, stochastic gradient descent methods, adaptive gradient descent methods, finite difference methods.
 
 ## References
 
-1. Nemirovsky А. and D. Yudin. Informational Complexity and Efficient Methods for Solution of Convex Extremal Problems, J. Wiley & Sons, New York, 1983.
-2. Bottou, L., Curtis, F.E., Nocedal, J. (2018). Optimization Methods for Large-Scale Machine Learning. SIAM Review. Vol. 60(2), pp. 223–311. DOI:10.1137/16m1080173
-3. The Impact of the Mini-batch Size on the Variance of Gradients in Stochastic Gradient Descent [Text] / Xin Qian, Diego Klabjan.−arXiv Preprint.−Optimization and Control.−2020.−arXiv:2004.13146.
-4. Duchi J., Jordan M., Wainwright M., Wibisono A. Optimal rates for zero-order optimization: the power of two function evaluations. [Text] // IEEE Transactions on Information Theory.-2015.-Vol. 61(5).-pp. 2788-2806.
-5. Polyak, B.T. (1987). Introduction to Optimization. Optimization Software.
-6. Norkin V.I. Two random search algorithms for minimizing non-differentiable functions. Mathematical Methods for Research of Operations and Reliability Theory. [Text] / Yu.M. Ermoliev, I.N. Kovalenko. // Kyiv: Institute of Cybernetics.-1978.-pp. 36–40.
-7. A method for unconstrained convex minimization problem with the rate of convergence  [Text] / Yurii Nesterov.-1983.-Reports of the Academy of Sciences.-pp. 543–547.
-8. Duchi J., Hazan E., Singer Y. Adaptive subgradient methods for online learning and stochastic optimization. Journal of Machine Learning Research, 12(Jul.):2121–2159, 2011.
-9. Kingma D., Ba J. Adam: a method for stochastic optimization. ICLR, 2015. arXiv:1412.6980v9 [cs.LG] 30 Jan 2017.
+1. NEWTON, David, Farzad YOUSEFIAN, and Raghu PASUPATHY. Stochastic gradient descent: recent trends. Online. In: Recent advances in optimization and modeling of contemporary problems, pp. 1–2. INFORMS, 2018. ISBN 9780990615323. Available from: https://doi.org/10.1287/educ.2018.0191. [viewed 2021-11-11].
+2. ILYIN, Vladimir, and Eduard POZNYAK. Fundamentals of mathematical analysis. In: The course of calculus and mathematical physics, p. 644. Moscow: Fizmatlit, 2009. ISBN 5922105361.
+3. ZORICH, Vladimir. Basic theorems of differential calculus. In: Calculus, part 1, p. 215. Moscow: FASIS, 1997. ISBN 5703600316.
+4. PIRUMOV, Ulyan. Function approximation. Numerical integration and differentiation. In: Numerical methods, pp. 78–79. Moscow: MAI, 1998. ISBN 5703521904.
+5. BAYANDINA, A. S., A. V. GASNIKOV, and A. A. LAGUNOVSKAYA. Gradient-Free two-point methods for solving stochastic nonsmooth convex optimization problems with small non-random noises. Online. Automation and Remote Control, vol. 79 (August 2018), no. 8, pp. 1399–1408. ISSN 1608-3032. Available from: https://doi.org/10.1134/s0005117918080039. [viewed 2022-01-04].
+6. DUCHI, John C., Michael I. JORDAN, Martin J. WAINWRIGHT, and Andre WIBISONO. Optimal rates for zero-order convex optimization: the power of two function evaluations. Online. IEEE Transactions on Information Theory, vol. 61 (May 2015), no. 5, pp. 2788–2806. ISSN 1557-9654. Available from: https://doi.org/10.1109/tit.2015.2409256. [viewed 2022-03-06].
+7. NORKIN, Vladimir. A stochastic smoothing method for nonsmooth global optimization. Online. Cybernetics and Computer Technologies, March 2020, no. 1, pp. 5–14. ISSN 2707-451X. Available from: https://doi.org/10.34229/2707-451x.20.1.1. [viewed 2022-03-09].
+8. ATTETKOV, Alexander, Vladimir ZARUBIN, and Anatoly KANATNIKOV. Multidimensional unconstrained optimization. In: Introduction to optimization methods, pp. 49–54. Moscow: INFRA-M, 2008. ISBN 9785279032518.
+9. QIAN, Ning. On the momentum term in gradient descent learning algorithms. Online. Neural Networks, vol. 12 (January 1999), no. 1, pp. 145–151. ISSN 0893-6080. Available from: https://doi.org/10.1016/s0893-6080(98)00116-6. [viewed 2022-03-15].
+10. NESTEROV, Yurii. A method of solving a convex programming problem with convergence rate 0(1/k2). Dokl. Akad. Nauk SSSR, vol. 269 (1983), no. 27, pp. 543–547.
+11. WALKINGTON, Noel. Nesterov method for convex optimization. SIAM Journal on Numerical Analysis, 2021, pp. 9–11.
+12. DUCHI, John, Elad HAZAN, and Yoram SINGER. Adaptive Subgradient Methods for Online Learning and Stochastic Optimization. Journal of Machine Learning Research, vol. 12 (2011), pp. 1–3.
