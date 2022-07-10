@@ -7,12 +7,12 @@ def grad_left(F: Callable[[np.array], np.array], x: np.array, h=0.001) -> np.arr
     """A finite-difference approximation for left-side gradient $\nabla F_{-}(x)$ with the precision order $O(h^2)$.
 
     Args:
-        F (Callable[[np.array], np.array]): A target function $F(x)$ with a single input argument $x \in \mathbb{R}^n$.
-        x (np.array): An input vector $x \in \mathbb{R}^n$, where the derivative is calculated.
-        h (float, optional): The step of the partitioning grid with the range of $0<h<1$. The lower value, the higher gradient precision. Defaults to 0.001.
+        F (Callable[[np.array], np.array]): a target function $F(x)$ with a single input argument $x \in \mathbb{R}^n$.
+        x (np.array): an input vector $x \in \mathbb{R}^n$, where the derivative is calculated.
+        h (float, optional): a step of the derivative partitioning grid with the range of $0<h<1$. The lower value, the higher gradient precision. Defaults to 0.001.
 
     Returns:
-        np.array: A gradient vector approximation $\nabla F_{-}(x)$.
+        np.array: a gradient vector approximation $\nabla F_{-}(x)$.
     """
 
     n, grad = len(x), np.zeros(x.shape)
@@ -28,12 +28,12 @@ def grad_center(F: Callable[[np.array], np.array], x: np.array, h=0.001) -> np.a
     """A finite-difference approximation for central gradient $\nabla F(x)$ with the precision order $O(h^2)$.
 
     Args:
-        F (Callable[[np.array], np.array]): A target function $F(x)$ with a single input argument $x \in \mathbb{R}^n$.
-        x (np.array): An input vector $x \in \mathbb{R}^n$, where the derivative is calculated.
-        h (float, optional): The step of the partitioning grid with the range of $0<h<1$. The lower value, the higher gradient precision. Defaults to 0.001.
+        F (Callable[[np.array], np.array]): a target function $F(x)$ with a single input argument $x \in \mathbb{R}^n$.
+        x (np.array): an input vector $x \in \mathbb{R}^n$, where the derivative is calculated.
+        h (float, optional): a step of the derivative partitioning grid with the range of $0<h<1$. The lower value, the higher gradient precision. Defaults to 0.001.
 
     Returns:
-        np.array: A gradient vector approximation $\nabla F(x)$.
+        np.array: a gradient vector approximation $\nabla F(x)$.
     """
 
     n, grad = len(x), np.zeros(x.shape)
@@ -49,12 +49,12 @@ def grad_right(F: Callable[[np.array], np.array], x: np.array, h=0.001) -> np.ar
     """A finite-difference approximation for right-side gradient $\nabla F_{+}(x)$ with the precision order $O(h^2)$.
 
     Args:
-        F (Callable[[np.array], np.array]): A target function $F(x)$ with a single input argument $x \in \mathbb{R}^n$.
-        x (np.array): An input vector $x \in \mathbb{R}^n$, where the derivative is calculated.
-        h (float, optional): The step of the partitioning grid with the range of $0<h<1$. The lower value, the higher gradient precision. Defaults to 0.001.
+        F (Callable[[np.array], np.array]): a target function $F(x)$ with a single input argument $x \in \mathbb{R}^n$.
+        x (np.array): an input vector $x \in \mathbb{R}^n$, where the derivative is calculated.
+        h (float, optional): a step of the derivative partitioning grid with the range of $0<h<1$. The lower value, the higher gradient precision. Defaults to 0.001.
 
     Returns:
-        np.array: A gradient vector approximation $\nabla F_{+}(x)$.
+        np.array: a gradient vector approximation $\nabla F_{+}(x)$.
     """
 
     n, grad = len(x), np.zeros(x.shape)
@@ -71,13 +71,13 @@ def grad_smoothed(F: Callable[[np.array], np.array], x: np.array, h=0.001, k=10)
 Can be also applied to the non-smooth and (or) non-convex target function.
 
     Args:
-        F (Callable[[np.array], np.array]): A target function $F(x)$ with a single input argument $x \in \mathbb{R}^n$. 
-        x (np.array): An input vector $x \in \mathbb{R}^n$, where the derivative is calculated.
-        h (float, optional): The step of the partitioning grid with the range of $0<h<1$. The lower value, the higher gradient precision. Defaults to 0.001.
-        k (int, optional): The order of smoothing $k \in \mathbb{N}$. The higher value, the higher gradient precision. Defaults to 10.
+        F (Callable[[np.array], np.array]): a target function $F(x)$ with a single input argument $x \in \mathbb{R}^n$. 
+        x (np.array): an input vector $x \in \mathbb{R}^n$, where the derivative is calculated.
+        h (float, optional): a step of the derivative partitioning grid with the range of $0<h<1$. The lower value, the higher gradient precision. Defaults to 0.001.
+        k (int, optional): a order of smoothing $k \in \mathbb{N}$. The higher value, the higher gradient precision. Defaults to 10.
 
     Returns:
-        np.array: A gradient vector approximation $\nabla F_{h}(x)$.
+        np.array: a gradient vector approximation $\nabla F_{h}(x)$.
     """
 
     n, grad = len(x), np.zeros(x.shape)
