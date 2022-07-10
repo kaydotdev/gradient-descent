@@ -6,10 +6,10 @@ from grad import grad_center, grad_smoothed
 
 CriteriaType = "args" | "func" | "mixed" | "grad";
 """A stop criteria for a gradient descent algorithms:
- - "args" - Norm of difference between adjacent element: $| x^{i} - x^{i-1} | < \varepsilon_{1}$
- - "func" - Norm of difference between fucntions value of adjacent element: $| F_{h}(x^{i}) - F_{h}(x^{i-1}) | < \varepsilon_{2}$
- - "mixed" - Combined criterias of "args" and "func": $| x^{i} - x^{i-1} | < \varepsilon_{1}, | F_{h}(x^{i}) - F_{h}(x^{i-1}) | < \varepsilon_{2}$
- - "grad" - Norm of a gradient value in the current element: $$
+ - "args" - Norm of difference between adjacent element: $|| x^{i} - x^{i-1} || < \varepsilon_{1};$
+ - "func" - Norm of difference between fucntions value of adjacent element: $|| F(x^{i}) - F(x^{i-1}) || < \varepsilon_{2};$
+ - "mixed" - Combined criterias of "args" and "func": $|| x^{i} - x^{i-1} || < \varepsilon_{1}, || F_{h}(x^{i}) - F_{h}(x^{i-1}) || < \varepsilon_{2};$
+ - "grad" - Norm of a gradient value in the current element: || \nabla F(x^{i}) || < \varepsilon_{1}.$$
 """
 
 
@@ -23,7 +23,10 @@ def SGD(F: Callable[[np.array], np.array], x: np.array, epoch: int,
         x = x - step * grad
         xi = np.vstack((xi, x))
 
-        if np.linalg.norm(grad) < eps1: break
+        if criteria == "args" and np.linalg.norm(x[-1] - x[-2]) < eps1: break
+        elif criteria == "func" and np.linalg.norm(F(x[-1]) - F(x[-2])) < eps2: break
+        elif criteria == "mixed" and (np.linalg.norm(x[-1] - x[-2]) < eps1 and np.linalg.norm(F(x[-1]) - F(x[-2])) < eps2): break
+        elif criteria == "grad" and np.linalg.norm(grad) < eps1: break
         else: iter += 1
 
     return x, xi, iter
@@ -41,7 +44,10 @@ def Momentum(F: Callable[[np.array], np.array], x: np.array, epoch: int, gamma: 
         x, vt = x - v, v
         xi = np.vstack((xi, x))
 
-        if np.linalg.norm(grad) < eps1: break
+        if criteria == "args" and np.linalg.norm(x[-1] - x[-2]) < eps1: break
+        elif criteria == "func" and np.linalg.norm(F(x[-1]) - F(x[-2])) < eps2: break
+        elif criteria == "mixed" and (np.linalg.norm(x[-1] - x[-2]) < eps1 and np.linalg.norm(F(x[-1]) - F(x[-2])) < eps2): break
+        elif criteria == "grad" and np.linalg.norm(grad) < eps1: break
         else: iter += 1
 
     return x, xi, iter
@@ -59,7 +65,10 @@ def NAG(F: Callable[[np.array], np.array], x: np.array, epoch: int, gamma: float
         x, vt = x - v, v
         xi = np.vstack((xi, x))
 
-        if np.linalg.norm(grad) < eps1: break
+        if criteria == "args" and np.linalg.norm(x[-1] - x[-2]) < eps1: break
+        elif criteria == "func" and np.linalg.norm(F(x[-1]) - F(x[-2])) < eps2: break
+        elif criteria == "mixed" and (np.linalg.norm(x[-1] - x[-2]) < eps1 and np.linalg.norm(F(x[-1]) - F(x[-2])) < eps2): break
+        elif criteria == "grad" and np.linalg.norm(grad) < eps1: break
         else: iter += 1
 
     return x, xi, iter
@@ -77,7 +86,10 @@ def AdaGrad(F: Callable[[np.array], np.array], x: np.array, epoch: int,
         x = x - (step / np.sqrt(G + vareps)) * grad
         xi = np.vstack((xi, x))
 
-        if np.linalg.norm(grad) < eps1: break
+        if criteria == "args" and np.linalg.norm(x[-1] - x[-2]) < eps1: break
+        elif criteria == "func" and np.linalg.norm(F(x[-1]) - F(x[-2])) < eps2: break
+        elif criteria == "mixed" and (np.linalg.norm(x[-1] - x[-2]) < eps1 and np.linalg.norm(F(x[-1]) - F(x[-2])) < eps2): break
+        elif criteria == "grad" and np.linalg.norm(grad) < eps1: break
         else: iter += 1
 
     return x, xi, iter
@@ -95,7 +107,10 @@ def RMSProp(F: Callable[[np.array], np.array], x: np.array, epoch: int,
         x = x - (step / np.sqrt(G + vareps)) * grad
         xi = np.vstack((xi, x))
 
-        if np.linalg.norm(grad) < eps1: break
+        if criteria == "args" and np.linalg.norm(x[-1] - x[-2]) < eps1: break
+        elif criteria == "func" and np.linalg.norm(F(x[-1]) - F(x[-2])) < eps2: break
+        elif criteria == "mixed" and (np.linalg.norm(x[-1] - x[-2]) < eps1 and np.linalg.norm(F(x[-1]) - F(x[-2])) < eps2): break
+        elif criteria == "grad" and np.linalg.norm(grad) < eps1: break
         else: iter += 1
 
     return x, xi, iter
@@ -117,7 +132,10 @@ def Adam(F: Callable[[np.array], np.array], x: np.array, epoch: int,
         x = x - (step / np.sqrt(v + vareps)) * m
         xi = np.vstack((xi, x))
 
-        if np.linalg.norm(grad) < eps1: break
+        if criteria == "args" and np.linalg.norm(x[-1] - x[-2]) < eps1: break
+        elif criteria == "func" and np.linalg.norm(F(x[-1]) - F(x[-2])) < eps2: break
+        elif criteria == "mixed" and (np.linalg.norm(x[-1] - x[-2]) < eps1 and np.linalg.norm(F(x[-1]) - F(x[-2])) < eps2): break
+        elif criteria == "grad" and np.linalg.norm(grad) < eps1: break
         else: iter += 1
 
     return x, xi, iter
