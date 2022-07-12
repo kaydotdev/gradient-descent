@@ -33,13 +33,16 @@ def SGD(F: Callable[[np.array], np.array], x: np.array, epoch: int,
         Tuple[np.array, np.array, int]: An optimal vector, a gradient descent sequence, and a number of iterations.
     """
 
+    trange = tqdm(range(epoch))
     xi = np.copy(x)
     iter = 0
 
-    for _ in tqdm(range(epoch)):
+    for _ in trange:
         grad = grad_center(F, x, h) if k == 0 else grad_smoothed(F, x, h, k)
         x = x - step * grad
         xi = np.vstack((xi, x))
+
+        trange.set_postfix({ "x": np.round(x, 6), "F": np.round(F(x), 6) })
 
         if criteria == "args" and np.linalg.norm(xi[-1] - xi[-2]) < eps1: break
         elif criteria == "func" and np.linalg.norm(F(xi[-1]) - F(xi[-2])) < eps2: break
@@ -70,15 +73,18 @@ def Momentum(F: Callable[[np.array], np.array], x: np.array, epoch: int, gamma: 
         Tuple[np.array, np.array, int]: An optimal vector, a gradient descent sequence, and a number of iterations.
     """
 
+    trange = tqdm(range(epoch))
     xi = np.copy(x)
     vt = np.zeros(x.shape)
     iter = 0
 
-    for _ in tqdm(range(epoch)):
+    for _ in trange:
         grad = grad_center(F, x, h) if k == 0 else grad_smoothed(F, x, h, k)
         v = gamma * vt + step * grad
         x, vt = x - v, v
         xi = np.vstack((xi, x))
+
+        trange.set_postfix({ "x": np.round(x, 6), "F": np.round(F(x), 6) })
 
         if criteria == "args" and np.linalg.norm(xi[-1] - xi[-2]) < eps1: break
         elif criteria == "func" and np.linalg.norm(F(xi[-1]) - F(xi[-2])) < eps2: break
@@ -109,15 +115,18 @@ def NAG(F: Callable[[np.array], np.array], x: np.array, epoch: int, gamma: float
         Tuple[np.array, np.array, int]: An optimal vector, a gradient descent sequence, and a number of iterations.
     """
 
+    trange = tqdm(range(epoch))
     xi = np.copy(x)
     vt = np.zeros(x.shape)
     iter = 0
 
-    for _ in tqdm(range(epoch)):
+    for _ in trange:
         grad = grad_center(F, x - gamma * vt, h) if k == 0 else grad_smoothed(F, x - gamma * vt, h, k)
         v = gamma * vt + step * grad
         x, vt = x - v, v
         xi = np.vstack((xi, x))
+
+        trange.set_postfix({ "x": np.round(x, 6), "F": np.round(F(x), 6) })
 
         if criteria == "args" and np.linalg.norm(xi[-1] - xi[-2]) < eps1: break
         elif criteria == "func" and np.linalg.norm(F(xi[-1]) - F(xi[-2])) < eps2: break
@@ -148,15 +157,18 @@ def AdaGrad(F: Callable[[np.array], np.array], x: np.array, epoch: int,
         Tuple[np.array, np.array, int]: An optimal vector, a gradient descent sequence, and a number of iterations.
     """
 
+    trange = tqdm(range(epoch))
     xi = np.copy(x)
     G = np.zeros(x.shape)
     iter = 0
 
-    for _ in tqdm(range(epoch)):
+    for _ in trange:
         grad = grad_center(F, x, h) if k == 0 else grad_smoothed(F, x, h, k)
         G = G + grad ** 2
         x = x - (step / np.sqrt(G + vareps)) * grad
         xi = np.vstack((xi, x))
+
+        trange.set_postfix({ "x": np.round(x, 6), "F": np.round(F(x), 6) })
 
         if criteria == "args" and np.linalg.norm(xi[-1] - xi[-2]) < eps1: break
         elif criteria == "func" and np.linalg.norm(F(xi[-1]) - F(xi[-2])) < eps2: break
@@ -188,15 +200,18 @@ def RMSProp(F: Callable[[np.array], np.array], x: np.array, epoch: int,
         Tuple[np.array, np.array, int]: An optimal vector, a gradient descent sequence, and a number of iterations.
     """
 
+    trange = tqdm(range(epoch))
     xi = np.copy(x)
     G = np.zeros(x.shape)
     iter = 0
 
-    for _ in tqdm(range(epoch)):
+    for _ in trange:
         grad = grad_center(F, x, h) if k == 0 else grad_smoothed(F, x, h, k)
         G = beta * G + (1 - beta) * grad ** 2
         x = x - (step / np.sqrt(G + vareps)) * grad
         xi = np.vstack((xi, x))
+
+        trange.set_postfix({ "x": np.round(x, 6), "F": np.round(F(x), 6) })
 
         if criteria == "args" and np.linalg.norm(xi[-1] - xi[-2]) < eps1: break
         elif criteria == "func" and np.linalg.norm(F(xi[-1]) - F(xi[-2])) < eps2: break
@@ -229,12 +244,13 @@ def Adam(F: Callable[[np.array], np.array], x: np.array, epoch: int,
         Tuple[np.array, np.array, int]: An optimal vector, a gradient descent sequence, and a number of iterations.
     """
 
+    trange = tqdm(range(epoch))
     xi = np.copy(x)
     m = np.zeros(x.shape)
     v = np.zeros(x.shape)
     iter = 0
 
-    for _ in tqdm(range(epoch)):
+    for _ in trange:
         grad = grad_center(F, x, h) if k == 0 else grad_smoothed(F, x, h, k)
 
         m = beta1 * m + (1 - beta1) * grad
@@ -242,6 +258,8 @@ def Adam(F: Callable[[np.array], np.array], x: np.array, epoch: int,
 
         x = x - (step / np.sqrt(v + vareps)) * m
         xi = np.vstack((xi, x))
+
+        trange.set_postfix({ "x": np.round(x, 6), "F": np.round(F(x), 6) })
 
         if criteria == "args" and np.linalg.norm(xi[-1] - xi[-2]) < eps1: break
         elif criteria == "func" and np.linalg.norm(F(xi[-1]) - F(xi[-2])) < eps2: break
