@@ -42,7 +42,7 @@ def SGD(F: Callable[[np.array], np.array], x: np.array, epoch: int,
         x = x - step * grad
         xi = np.vstack((xi, x))
 
-        trange.set_postfix({ "x": np.round(x, 6), "F": np.round(F(x), 6) })
+        trange.set_postfix({ "F": np.round(F(x), 6) })
 
         if criteria == "args" and np.linalg.norm(xi[-1] - xi[-2]) < eps1: break
         elif criteria == "func" and np.linalg.norm(F(xi[-1]) - F(xi[-2])) < eps2: break
@@ -84,7 +84,7 @@ def Momentum(F: Callable[[np.array], np.array], x: np.array, epoch: int, gamma: 
         x, vt = x - v, v
         xi = np.vstack((xi, x))
 
-        trange.set_postfix({ "x": np.round(x, 6), "F": np.round(F(x), 6) })
+        trange.set_postfix({ "F": np.round(F(x), 6) })
 
         if criteria == "args" and np.linalg.norm(xi[-1] - xi[-2]) < eps1: break
         elif criteria == "func" and np.linalg.norm(F(xi[-1]) - F(xi[-2])) < eps2: break
@@ -126,7 +126,7 @@ def NAG(F: Callable[[np.array], np.array], x: np.array, epoch: int, gamma: float
         x, vt = x - v, v
         xi = np.vstack((xi, x))
 
-        trange.set_postfix({ "x": np.round(x, 6), "F": np.round(F(x), 6) })
+        trange.set_postfix({ "F": np.round(F(x), 6) })
 
         if criteria == "args" and np.linalg.norm(xi[-1] - xi[-2]) < eps1: break
         elif criteria == "func" and np.linalg.norm(F(xi[-1]) - F(xi[-2])) < eps2: break
@@ -168,7 +168,7 @@ def AdaGrad(F: Callable[[np.array], np.array], x: np.array, epoch: int,
         x = x - (step / np.sqrt(G + vareps)) * grad
         xi = np.vstack((xi, x))
 
-        trange.set_postfix({ "x": np.round(x, 6), "F": np.round(F(x), 6) })
+        trange.set_postfix({ "F": np.round(F(x), 6) })
 
         if criteria == "args" and np.linalg.norm(xi[-1] - xi[-2]) < eps1: break
         elif criteria == "func" and np.linalg.norm(F(xi[-1]) - F(xi[-2])) < eps2: break
@@ -211,7 +211,7 @@ def RMSProp(F: Callable[[np.array], np.array], x: np.array, epoch: int,
         x = x - (step / np.sqrt(G + vareps)) * grad
         xi = np.vstack((xi, x))
 
-        trange.set_postfix({ "x": np.round(x, 6), "F": np.round(F(x), 6) })
+        trange.set_postfix({ "F": np.round(F(x), 6) })
 
         if criteria == "args" and np.linalg.norm(xi[-1] - xi[-2]) < eps1: break
         elif criteria == "func" and np.linalg.norm(F(xi[-1]) - F(xi[-2])) < eps2: break
@@ -259,7 +259,7 @@ def Adam(F: Callable[[np.array], np.array], x: np.array, epoch: int,
         x = x - (step / np.sqrt(v + vareps)) * m
         xi = np.vstack((xi, x))
 
-        trange.set_postfix({ "x": np.round(x, 6), "F": np.round(F(x), 6) })
+        trange.set_postfix({ "F": np.round(F(x), 6) })
 
         if criteria == "args" and np.linalg.norm(xi[-1] - xi[-2]) < eps1: break
         elif criteria == "func" and np.linalg.norm(F(xi[-1]) - F(xi[-2])) < eps2: break
