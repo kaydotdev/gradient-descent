@@ -15,6 +15,12 @@ Nowadays, stochastic gradient algorithms have become one of the most popular num
 
 Gradient descent methods, optimization theory, unconstrained optimization, nonsmooth problems, stochastic gradient descent methods, adaptive gradient descent methods, finite difference methods.
 
+## Results
+
+The proposed finite-difference modification applies to any stochastic gradient descent algorithms because it requires only a substitution of analytical gradient value with its approximation. Therefore, we preserve the properties and benefits when applying the modification for the arbitrary adaptive stochastic gradient algorithm. As shown in the figure below, we significantly decreased the number of iterations for a small number of smoothing terms.
+
+![Logarithm function](./docs/iter_comparison.png)
+
 ## References
 
 1. NEWTON, David, Farzad YOUSEFIAN, and Raghu PASUPATHY. Stochastic gradient descent: recent trends. Online. In: Recent advances in optimization and modeling of contemporary problems, pp. 1–2. INFORMS, 2018. ISBN 9780990615323. Available from: https://doi.org/10.1287/educ.2018.0191. [viewed 2021-11-11].
