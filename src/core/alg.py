@@ -2,7 +2,7 @@ import numpy as np
 
 from tqdm import tqdm
 from typing import Callable, Tuple, Literal
-from grad import grad_center, grad_smoothed
+from .grad import grad_center, grad_smoothed
 
 
 CriteriaType = Literal["args", "func", "mixed", "grad"]

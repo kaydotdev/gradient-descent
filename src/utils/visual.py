@@ -31,7 +31,7 @@ def plot_stats(F: Callable[[np.array], np.array], pathes: Tuple, borders: Tuple,
     ax.plot(range(y_hist.shape[0]), y_hist, label=label, marker=".")
     ax.grid()
 
-    ax.set_title("Target function value per iteration. Total iterations: {it}")
+    ax.set_title(f"Target function value per iteration. Total iterations: {it}")
     ax.legend()
 
     fig.tight_layout()
