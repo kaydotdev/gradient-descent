@@ -1,7 +1,7 @@
 import argparse
 import numpy as np
 
-from alg import *
+from core.alg import *
 
 
 exp = lambda x: np.exp(x)
