@@ -6,7 +6,8 @@ V. I. Norkin (1), A. Y. Kozyriev (1)
 
 [1 - Igor Sikorsky Kyiv Polytechnic Institute, Kyiv, Ukraine](https://kpi.ua/en)
 
-[![Open paper in Colab](https://img.shields.io/badge/Colab-F9AB00?style=for-the-badge&logo=googlecolab&color=525252&)](https://colab.research.google.com/github/antonAce/gradient-descent/blob/master/notebook/paper.ipynb)
+[![Open paper in Colab](https://img.shields.io/badge/Colab-F9AB00?style=for-the-badge&logo=googlecolab&color=525252)](https://colab.research.google.com/github/antonAce/gradient-descent/blob/master/notebook/paper.ipynb)
+[![Open paper in Kaggle](https://img.shields.io/badge/Kaggle-20BEFF?style=for-the-badge&logo=Kaggle&logoColor=white)](https://www.kaggle.com/notebooks/welcome?src=https://github.com/antonAce/gradient-descent/blob/master/notebook/paper.ipynb)
 
 ## Abstract
 
