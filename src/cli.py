@@ -13,7 +13,7 @@ abs = lambda x: np.abs(x)
 sqrt = lambda x: np.sqrt(x)
 
 def main():
-    parser = argparse.ArgumentParser(description="Process some integers.")
+    parser = argparse.ArgumentParser(description="Gradient descent optimization from CLI.")
     parser.add_argument("epoch", type=int, help="a maximum number of iterations.")
     parser.add_argument("function", type=str, help="a target function F(x) with 'x' as a single input argument.")
     parser.add_argument("x", type=float, nargs='+', help="a start element x0 in a sequence.")
