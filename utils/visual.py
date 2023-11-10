@@ -5,15 +5,15 @@ import matplotlib.pyplot as plt
 from typing import Callable, Tuple
 
 
-def plot_stats(F: Callable[[np.array], np.array], pathes: Tuple, borders: Tuple, label: str, grid_dens=0.01):
-    x_opt, x_hist, y_hist, it = pathes
-    xmin, xmax, ymin, ymax = borders
-    X = np.meshgrid(np.arange(xmin, xmax, grid_dens), np.arange(ymin, ymax, grid_dens))
+def plot_convergence(F: Callable[[np.array], np.array], paths: Tuple, borders: Tuple, label: str, grid_dens=0.01):
+    x_opt, x_hist, y_hist, it = paths
+    x_min, x_max, y_min, y_max = borders
+    x_grid = np.meshgrid(np.arange(x_min, x_max, grid_dens), np.arange(y_min, y_max, grid_dens))
 
     fig = plt.figure(figsize=(16, 9))
     ax = fig.add_subplot(2, 2, (1, 3), projection='3d')
 
-    fig.colorbar(ax.contour3D(X[0], X[1], F(X), 50, cmap=cm.coolwarm, antialiased=True))
+    fig.colorbar(ax.contour3D(x_grid[0], x_grid[1], F(x_grid), 50, cmap=cm.coolwarm, antialiased=True))
     ax.plot(x_hist.T[0], x_hist.T[1], y_hist, label=label)
     ax.grid()
 

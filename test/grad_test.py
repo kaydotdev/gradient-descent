@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 
-from core.grad import *
+from common.grad import grad_left, grad_center, grad_right, grad_smoothed
 
 
 @pytest.fixture(scope="function", params=[
@@ -13,6 +13,7 @@ from core.grad import *
 def non_smoothed_single_variable_params(request):
     return request.param
 
+
 @pytest.fixture(scope="function", params=[
     (np.array([2.0]), 1e-6, 32.0, 5, 1),
     (np.array([2.0]), 1e-6, 32.0, 5, 3),
@@ -21,6 +22,7 @@ def non_smoothed_single_variable_params(request):
     (np.array([2.0]), 1e-6, 32.0, 5, 250)])
 def smoothed_single_variable_params(request):
     return request.param
+
 
 @pytest.fixture(scope="function", params=[
     (np.array([2.0, -1.0]), 1e-6, np.array([3.0, 0.0]), 5),
@@ -31,26 +33,29 @@ def smoothed_single_variable_params(request):
 def non_smoothed_multiple_variable_params(request):
     return request.param
 
-def test_non_smoothed_should_calculate_grad_vector_single_variable(non_smoothed_single_variable_params):
-    F = lambda x: x ** 3 + 2 * x ** 2 + 12 * x + 100
-    (x0, h, g0, dec) = non_smoothed_single_variable_params # input variable, grid step, expected gradient value, decimal accuracy
 
-    np.testing.assert_almost_equal(grad_left(F, x0, h=h), g0, decimal=dec)
-    np.testing.assert_almost_equal(grad_center(F, x0, h=h), g0, decimal=dec)
-    np.testing.assert_almost_equal(grad_right(F, x0, h=h), g0, decimal=dec)
+def test_non_smoothed_should_calculate_grad_vector_single_variable(non_smoothed_single_variable_params):
+    f = lambda x: x ** 3 + 2 * x ** 2 + 12 * x + 100
+    x0, h, g0, accuracy = non_smoothed_single_variable_params
+
+    np.testing.assert_almost_equal(grad_left(f, x0, h=h), g0, decimal=accuracy)
+    np.testing.assert_almost_equal(grad_center(f, x0, h=h), g0, decimal=accuracy)
+    np.testing.assert_almost_equal(grad_right(f, x0, h=h), g0, decimal=accuracy)
+
 
 def test_smoothed_should_calculate_grad_vector_single_variable(smoothed_single_variable_params):
     np.random.seed(0)
 
-    F = lambda x: x ** 3 + 2 * x ** 2 + 12 * x + 100
-    (x0, h, g0, dec, k) = smoothed_single_variable_params # input variable, grid step, expected gradient value, decimal accuracy, smoothing term
+    f = lambda x: x ** 3 + 2 * x ** 2 + 12 * x + 100
+    (x0, h, g0, dec, k) = smoothed_single_variable_params
 
-    np.testing.assert_almost_equal(grad_smoothed(F, x0, h=h, k=k), g0, decimal=dec)
+    np.testing.assert_almost_equal(grad_smoothed(f, x0, h=h, k=k), g0, decimal=dec)
+
 
 def test_non_smoothed_should_calculate_grad_vector_multiple_variable(non_smoothed_multiple_variable_params):
-    F = lambda x: x[0] ** 2 + x[0] * x[1] + x[1] ** 2
+    f = lambda x: x[0] ** 2 + x[0] * x[1] + x[1] ** 2
     (x0, h, g0, dec) = non_smoothed_multiple_variable_params
 
-    np.testing.assert_almost_equal(grad_left(F, x0, h=h), g0, decimal=dec)
-    np.testing.assert_almost_equal(grad_center(F, x0, h=h), g0, decimal=dec)
-    np.testing.assert_almost_equal(grad_right(F, x0, h=h), g0, decimal=dec)
+    np.testing.assert_almost_equal(grad_left(f, x0, h=h), g0, decimal=dec)
+    np.testing.assert_almost_equal(grad_center(f, x0, h=h), g0, decimal=dec)
+    np.testing.assert_almost_equal(grad_right(f, x0, h=h), g0, decimal=dec)
