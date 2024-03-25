@@ -5,10 +5,14 @@ import matplotlib.pyplot as plt
 from typing import Callable, Tuple
 
 
-def plot_convergence(F: Callable[[np.array], np.array], paths: Tuple, borders: Tuple, label: str, grid_dens=0.01):
-    x_opt, x_hist, y_hist, it = paths
+def build_meshgrid(borders: Tuple, grid_density=0.01):
     x_min, x_max, y_min, y_max = borders
-    x_grid = np.meshgrid(np.arange(x_min, x_max, grid_dens), np.arange(y_min, y_max, grid_dens))
+    return np.meshgrid(np.arange(x_min, x_max, grid_density), np.arange(y_min, y_max, grid_density))
+
+
+def plot_convergence(F: Callable[[np.array], np.array], paths: Tuple, borders: Tuple, label: str, grid_density=0.01):
+    x_opt, x_hist, y_hist, it = paths
+    x_grid = build_meshgrid(borders, grid_density=grid_density)
 
     fig = plt.figure(figsize=(16, 9))
     ax = fig.add_subplot(2, 2, (1, 3), projection='3d')

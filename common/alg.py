@@ -5,12 +5,13 @@ from typing import Callable, Tuple, Literal
 from .grad import grad_center, grad_smoothed
 
 
-CriteriaType = Literal["args", "func", "mixed", "grad"]
+CriteriaType = Literal["args", "func", "mixed", "grad", "none"]
 """A stop criteria for a gradient descent algorithms:
  - "args" - norm of difference between adjacent element: $|| x^{i} - x^{i-1} || < \\varepsilon_{1};$
  - "func" - norm of difference between functions value of adjacent element: $|| F(x^{i}) - F(x^{i-1}) || < \\varepsilon_{2};$
  - "mixed" - combined multiple criteria of "args" and "func": $|| x^{i} - x^{i-1} || < \\varepsilon_{1}, || F_{h}(x^{i}) - F_{h}(x^{i-1}) || < \\varepsilon_{2};$
  - "grad" - norm of a gradient value in the current element: $|| \\nabla F(x^{i}) || < \\varepsilon_{1}.$
+ - "none" - the upper boundary of an iterations number
 """
 
 

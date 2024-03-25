@@ -3,6 +3,8 @@ from PyQt5 import QtWidgets
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
+from common.alg import SGD, Momentum, NAG, AdaGrad, RMSProp, Adam
+
 
 class PlotTab:
     def __init__(self):
@@ -17,6 +19,11 @@ class PlotTab:
 class Window(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
+
+        self.optimizers = {
+            "sgd": SGD, "momentum": Momentum, "nag": NAG,
+            "adagrad": AdaGrad, "rmsprop": RMSProp, "adam": Adam
+        }
 
         layout = QtWidgets.QVBoxLayout(self)
 
